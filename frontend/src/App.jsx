@@ -8,7 +8,7 @@ function App() {
   const [quantity, setQuantity] = useState(100);
   const [volatility, setVolatility] = useState(0.02);
   const [feeTier, setFeeTier] = useState(0.001);
-  const [side, setSide] = useState('buy'); // Added side state
+  const [side, setSide] = useState('buy');
   const [output, setOutput] = useState({});
   const [socketData, setSocketData] = useState(null);
 
@@ -29,7 +29,6 @@ function App() {
       return;
     }
 
-    // Use asks for buy, bids for sell (to fill your order)
     const orderbook = side === 'buy' ? socketData.asks : socketData.bids;
 
     try {
@@ -56,63 +55,82 @@ function App() {
             Input Parameters
           </h3>
 
-          <input
-            type="text"
-            value={exchange}
-            onChange={(e) => setExchange(e.target.value)}
-            placeholder="Exchange (e.g., OKX)"
-            className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-md text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
-          />
-          <input
-            type="text"
-            value={spotAsset}
-            onChange={(e) => setSpotAsset(e.target.value)}
-            placeholder="Spot Asset (e.g., BTC-USDT)"
-            className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-md text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
-          />
-          <input
-            type="text"
-            value={orderType}
-            onChange={(e) => setOrderType(e.target.value)}
-            placeholder="Order Type (e.g., market)"
-            className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-md text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
-          />
+          <div>
+            <label className="block mb-1">Exchange</label>
+            <input
+              type="text"
+              value={exchange}
+              onChange={(e) => setExchange(e.target.value)}
+              placeholder="e.g., OKX"
+              className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-md text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+          </div>
 
-          <input
-            type="number"
-            value={quantity}
-            onChange={(e) => setQuantity(e.target.value)}
-            placeholder="Quantity (USD)"
-            className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-md text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
-          />
+          <div>
+            <label className="block mb-1">Spot Asset</label>
+            <input
+              type="text"
+              value={spotAsset}
+              onChange={(e) => setSpotAsset(e.target.value)}
+              placeholder="e.g., BTC-USDT"
+              className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-md text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+          </div>
 
-          <input
-            type="number"
-            value={volatility}
-            onChange={(e) => setVolatility(e.target.value)}
-            placeholder="Volatility"
-            step="0.001"
-            className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-md text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
-          />
+          <div>
+            <label className="block mb-1">Order Type</label>
+            <input
+              type="text"
+              value={orderType}
+              onChange={(e) => setOrderType(e.target.value)}
+              placeholder="e.g., market"
+              className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-md text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+          </div>
 
-          <input
-            type="number"
-            value={feeTier}
-            onChange={(e) => setFeeTier(e.target.value)}
-            placeholder="Fee Tier"
-            step="0.0001"
-            className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-md text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
-          />
+          <div>
+            <label className="block mb-1">Quantity (USD)</label>
+            <input
+              type="number"
+              value={quantity}
+              onChange={(e) => setQuantity(e.target.value)}
+              className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-md text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+          </div>
 
-          {/* Side Selector */}
-          <select
-            value={side}
-            onChange={(e) => setSide(e.target.value)}
-            className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-md text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
-          >
-            <option value="buy">Buy</option>
-            <option value="sell">Sell</option>
-          </select>
+          <div>
+            <label className="block mb-1">Volatility</label>
+            <input
+              type="number"
+              value={volatility}
+              onChange={(e) => setVolatility(e.target.value)}
+              step="0.001"
+              className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-md text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+          </div>
+
+          <div>
+            <label className="block mb-1">Fee Tier</label>
+            <input
+              type="number"
+              value={feeTier}
+              onChange={(e) => setFeeTier(e.target.value)}
+              step="0.0001"
+              className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-md text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+          </div>
+
+          <div>
+            <label className="block mb-1">Side</label>
+            <select
+              value={side}
+              onChange={(e) => setSide(e.target.value)}
+              className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-md text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+            >
+              <option value="buy">Buy</option>
+              <option value="sell">Sell</option>
+            </select>
+          </div>
 
           <button
             onClick={calculate}

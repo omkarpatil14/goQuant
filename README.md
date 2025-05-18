@@ -11,6 +11,7 @@ This API provides calculations for trade slippage, fees, market impact, and net 
 - [Market Impact Calculation Methodology](#market-impact-calculation-methodology)
 - [Performance Optimization Approaches](#performance-optimization-approaches)
 - [Usage](#usage)
+- [Running the Application](#running-the-application)
 
 ---
 
@@ -96,3 +97,18 @@ This backend service is built using Django REST framework and exposes an endpoin
   ],
   "time_horizon": 60
 }
+
+
+
+# How to Run the Application (Frontend + Backend)
+
+```bash
+# Run Backend
+cd backend
+pip install -r requirements.txt
+python manage.py runserver
+
+# Open a new terminal and run Frontend
+cd frontend
+npm install
+npm run dev
